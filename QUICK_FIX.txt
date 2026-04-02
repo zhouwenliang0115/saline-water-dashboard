@@ -1,0 +1,83 @@
+⚡ 网页空白？快速修复 - 仅需 1 分钟
+
+===========================================
+症状：网页加载但全是空白
+===========================================
+
+✅ 解决方案（按顺序尝试）
+
+【第 1 步】检查后端是否在运行
+
+1. 打开新的 CMD 窗口
+2. 运行：
+   cd d:\Objection_detection\saline-water-dashboard\backend
+   npm run dev
+
+3. 等待看到：Backend running on http://localhost:4000
+
+如果没有看到，说明后端启动失败，重复第 2 步。
+
+
+【第 2 步】刷新前端网页
+
+1. 回到浏览器窗口
+2. 按 Ctrl + F5（硬刷新，不是普通刷新）
+3. 等 3-5 秒看是否显示内容
+
+如果还是空白，继续第 3 步。
+
+
+【第 3 步】打开浏览器控制台看错误
+
+1. 再次访问 http://localhost:5173
+2. 按 F12 打开开发者工具
+3. 点击 "Console" 标签（控制台）
+4. 查看是否有红色错误信息 ❌
+
+常见错误：
+- "Cannot GET /api/ponds" 
+  → 后端确实未运行，重复第 1 步
+
+- "Cannot find module 'echarts'" 
+  → 前端依赖缺失，运行：
+    cd d:\Objection_detection\saline-water-dashboard\frontend
+    npm install
+
+- 其他任何红色错误 
+  → 复制错误信息，告诉我
+
+
+【第 4 步】执行极速诊断
+
+在浏览器控制台运行：
+  fetch('http://localhost:4000/api/ponds').then(r => r.json()).then(d => console.log(d)).catch(e => console.error('后端错误:', e))
+
+看到结果中有 "ponds" 数组说明后端正常。
+
+
+【第 5 步】启用诊断模式
+
+如果还是看不出问题：
+
+1. 用记事本打开：
+   d:\Objection_detection\saline-water-dashboard\frontend\src\App.tsx
+
+2. 删除现有内容，粘贴：
+   import DebugPage from "./pages/DebugPage";
+   const App = () => <div style={{height:"100vh",background:"#020f1d"}}><DebugPage/></div>;
+   export default App;
+
+3. 保存，网页自动刷新
+
+4. 你会看到诊断页面告诉你哪里出问题
+
+===========================================
+99% 的原因就是后端没启动！
+===========================================
+
+请立即尝试第 1 步，90% 可以解决！
+
+如果都试过了还不行，把以下信息告诉我：
+1. 浏览器控制台的红色错误信息（完整复制）
+2. 后端的输出信息
+3. http://localhost:4000/api/health 返回了什么
