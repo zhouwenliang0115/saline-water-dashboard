@@ -1,0 +1,1 @@
+export interface Pond { id: string; name: string; area: string; lon: number; lat: number; ph: number; temperature: number; conductivity: number; dissolvedOxygen: number; nh3: number; turbidity: number; updatedAt: string; status: "normal"|"warn"|"alert"; }
